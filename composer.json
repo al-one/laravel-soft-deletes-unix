@@ -1,0 +1,19 @@
+{
+    "name": "al-one/laravel-soft-deletes-unix",
+    "authors": [
+        {
+            "name": "Alone",
+            "email": "mail@anlong.me"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.9"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "Alone\\LaravelSoftDeletesUnix\\Eloquent\\": "src/Eloquent/"
+        }
+    },
+    "license": "MIT"
+}

@@ -6,6 +6,12 @@
 $ composer require al-one/laravel-soft-deletes-unix -vvv
 ```
 
+or 
+
+```sh
+$ composer require al-one/laravel-soft-deletes-unix:dev-master -vvv
+```
+
 
 ## Usage
 

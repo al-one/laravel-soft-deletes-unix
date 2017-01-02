@@ -1,5 +1,6 @@
 {
     "name": "al-one/laravel-soft-deletes-unix",
+    "description": "SoftDeletes With Unix Timestamp For Laravel",
     "authors": [
         {
             "name": "Alone",

@@ -2,9 +2,6 @@
 
 namespace Alone\LaravelSoftDeletesUnix\Eloquent;
 
-use Carbon\Carbon;
-use DateTimeInterface;
-
 trait SoftDeletesUnix
 {
     /**

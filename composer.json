@@ -1,6 +1,7 @@
 {
     "name": "al-one/laravel-soft-deletes-unix",
     "description": "SoftDeletes With Unix Timestamp For Laravel",
+    "keywords": ["laravel", "eloquent"],
     "authors": [
         {
             "name": "Alone",

@@ -26,7 +26,7 @@ class SoftDeletingUnixScope implements Scope
     {
         $builder->where(function(Builder $builder) use($model) {
             $column = $model->getQualifiedDeletedAtColumn();
-            $builder->where($column,0)->orWhere($column,'>=',(int)$model->freshTimestampString());
+            $builder->where($column,0)->orWhere($column,'>',(int)$model->freshTimestampString());
         });
     }
 
@@ -118,7 +118,7 @@ class SoftDeletingUnixScope implements Scope
 
             $builder->withoutGlobalScope($this)->where(function(Builder $builder) use($model) {
                 $column = $model->getQualifiedDeletedAtColumn();
-                $builder->where($column,0)->orWhere($column,'>=',(int)$model->freshTimestampString());
+                $builder->where($column,0)->orWhere($column,'>',(int)$model->freshTimestampString());
             });
 
             return $builder;

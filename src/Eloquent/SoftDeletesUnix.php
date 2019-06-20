@@ -27,13 +27,31 @@ trait SoftDeletesUnix
     }
 
     /**
+     * Perform the actual delete query on this model instance.
+     *
+     * @return void
+     */
+    protected function runSoftDelete()
+    {
+        $query = $this->setKeysForSaveQuery($this->newModelQuery());
+        $time = $this->freshTimestamp();
+        $columns = [$this->getDeletedAtColumn() => $this->freshTimestampUnix($time)];
+        $this->{$this->getDeletedAtColumn()} = $time;
+        if ($this->timestamps && ! is_null($this->getUpdatedAtColumn())) {
+            $this->{$this->getUpdatedAtColumn()} = $time;
+            $columns[$this->getUpdatedAtColumn()] = $this->fromDateTime($time);
+        }
+        $query->update($columns);
+    }
+
+    /**
      * Get a fresh timestamp for the model.
      *
      * @return int|string
      */
-    public function freshTimestampUnix()
+    public function freshTimestampUnix($time = null)
     {
-        $now = $this->freshTimestamp();
+        $now = isset($time) ? $time : $this->freshTimestamp();
         $fmt = $this->softDeleteDateFormat ?: $this->getDateFormat();
         return empty($now) ? $now : $this->asDateTime($now)->format($fmt);
     }

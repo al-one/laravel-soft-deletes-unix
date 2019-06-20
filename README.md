@@ -28,9 +28,8 @@ class Flight extends Model
 
     use SoftDeletesUnix;
 
-    protected $dateFormat = 'U';
-
     protected $dates = ['deleted_at'];
+
 }
 ```
 

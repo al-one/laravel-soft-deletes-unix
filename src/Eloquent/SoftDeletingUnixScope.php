@@ -20,7 +20,7 @@ class SoftDeletingUnixScope extends SoftDeletingScope
     {
         $builder->where(function(Builder $builder) use($model) {
             $column = $model->getQualifiedDeletedAtColumn();
-            $builder->where($column,0)->orWhere($column,'>',(int)$model->freshTimestampString());
+            $builder->where($column,0)->orWhere($column,'>',(int)$model->freshTimestampUnix());
         });
     }
 
@@ -52,7 +52,7 @@ class SoftDeletingUnixScope extends SoftDeletingScope
 
             $builder->withoutGlobalScope($this)->where(function(Builder $builder) use($model) {
                 $column = $model->getQualifiedDeletedAtColumn();
-                $builder->where($column,0)->orWhere($column,'>',(int)$model->freshTimestampString());
+                $builder->where($column,0)->orWhere($column,'>',(int)$model->freshTimestampUnix());
             });
 
             return $builder;
@@ -72,7 +72,7 @@ class SoftDeletingUnixScope extends SoftDeletingScope
 
             $builder->withoutGlobalScope($this)->where(function(Builder $builder) use($model) {
                 $column = $model->getQualifiedDeletedAtColumn();
-                $builder->where($column,'>=',1)->where($column,'<=',(int)$model->freshTimestampString());
+                $builder->where($column,'>=',1)->where($column,'<=',(int)$model->freshTimestampUnix());
             });
 
             return $builder;

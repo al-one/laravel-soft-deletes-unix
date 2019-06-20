@@ -5,11 +5,13 @@
     "authors": [
         {
             "name": "Alone",
-            "email": "mail@anlong.me"
+            "email": "hi@anlo.ng"
         }
     ],
     "require": {
-        "php": ">=5.5.9"
+        "php": ">=5.5.9",
+        "illuminate/contracts": "~5.3",
+        "illuminate/database": "~5.3"
     },
 
     "autoload": {

@@ -3,6 +3,8 @@
 namespace Alone\LaravelSoftDeletesUnix\Eloquent;
 
 use Illuminate\Database\Eloquent as EloquentBase;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 trait SoftDeletesUnix
 {
@@ -54,6 +56,23 @@ trait SoftDeletesUnix
         $now = isset($time) ? $time : $this->freshTimestamp();
         $fmt = $this->softDeleteDateFormat ?: $this->getDateFormat();
         return empty($now) ? $now : $this->asDateTime($now)->format($fmt);
+    }
+
+    /**
+     * Instantiate a new HasManyThrough relationship.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  \Illuminate\Database\Eloquent\Model  $farParent
+     * @param  \Illuminate\Database\Eloquent\Model  $throughParent
+     * @param  string  $firstKey
+     * @param  string  $secondKey
+     * @param  string  $localKey
+     * @param  string  $secondLocalKey
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
+    protected function newHasManyThrough(Builder $query, Model $farParent, Model $throughParent, $firstKey, $secondKey, $localKey, $secondLocalKey)
+    {
+        return new HasManyThrough($query, $farParent, $throughParent, $firstKey, $secondKey, $localKey, $secondLocalKey);
     }
 
 }

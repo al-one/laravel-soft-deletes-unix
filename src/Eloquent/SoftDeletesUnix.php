@@ -61,7 +61,7 @@ trait SoftDeletesUnix
     /**
      * Define a has-many-through relationship.
      *
-     * @version 5.3
+     * @version 5.4
      *
      * @param  string  $related
      * @param  string  $through
@@ -76,7 +76,8 @@ trait SoftDeletesUnix
         $firstKey = $firstKey ?: $this->getForeignKey();
         $secondKey = $secondKey ?: $through->getForeignKey();
         $localKey = $localKey ?: $this->getKeyName();
-        return new HasManyThrough((new $related)->newQuery(), $this, $through, $firstKey, $secondKey, $localKey);
+        $instance = $this->newRelatedInstance($related);
+        return new HasManyThrough($instance->newQuery(), $this, $through, $firstKey, $secondKey, $localKey);
     }
 
 }

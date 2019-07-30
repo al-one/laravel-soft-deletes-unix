@@ -59,25 +59,22 @@ trait SoftDeletesUnix
     }
 
     /**
-     * Define a has-many-through relationship.
+     * Instantiate a new HasManyThrough relationship.
      *
-     * @version 5.4
+     * @version 5.5+
      *
-     * @param  string  $related
-     * @param  string  $through
-     * @param  string|null  $firstKey
-     * @param  string|null  $secondKey
-     * @param  string|null  $localKey
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  \Illuminate\Database\Eloquent\Model  $farParent
+     * @param  \Illuminate\Database\Eloquent\Model  $throughParent
+     * @param  string  $firstKey
+     * @param  string  $secondKey
+     * @param  string  $localKey
+     * @param  string  $secondLocalKey
      * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
      */
-    public function hasManyThrough($related, $through, $firstKey = null, $secondKey = null, $localKey = null)
+    protected function newHasManyThrough(Builder $query, Model $farParent, Model $throughParent, $firstKey, $secondKey, $localKey, $secondLocalKey)
     {
-        $through = new $through;
-        $firstKey = $firstKey ?: $this->getForeignKey();
-        $secondKey = $secondKey ?: $through->getForeignKey();
-        $localKey = $localKey ?: $this->getKeyName();
-        $instance = $this->newRelatedInstance($related);
-        return new HasManyThrough($instance->newQuery(), $this, $through, $firstKey, $secondKey, $localKey);
+        return new HasManyThrough($query, $farParent, $throughParent, $firstKey, $secondKey, $localKey, $secondLocalKey);
     }
 
 }
